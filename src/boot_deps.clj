@@ -55,7 +55,7 @@
   (let [cache (core/cache-dir! :deps/sources)]
     (fn [next]
       (fn [fileset]
-        (let [sources (fetch-deps {:git git :jar jar} cache)
+        (let [sources (fetch-deps {:git git} cache)
               fileset (add-sources fileset sources)]
           (next fileset))))))
 
@@ -80,5 +80,5 @@
         ;; TODO: since boot might be buggy and we don't want to delete
         ;; anything critical by accident we present the task to the
         ;; user and ask him to confir deletion
-        (core/clear-dir! cache)
+        (core/empty-dir! cache)
         (next fileset)))))
